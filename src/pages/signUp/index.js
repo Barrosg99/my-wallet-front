@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react';
-import SignUpContainter from './SignUpContainer'
 import { Link, useHistory } from 'react-router-dom';
 import Axios from 'axios';
 
 import UserContext from '../../contexts/UserContext';
+import SignUpContainter from './SignUpContainer'
+import StyledInput from '../../components/Inputs/StyledInput';
+import StyledButton from '../../components/Buttons/StyledButton';
 
 export default function SignUp() {
     const [ name, setName ] = useState('');
@@ -48,34 +50,34 @@ export default function SignUp() {
         <SignUpContainter>
             <h1>MyWallet</h1>
             <form onSubmit = {signUp}>
-                <input
+                <StyledInput
                     placeholder = "Nome"
                     type = 'text'
                     value = { name }
                     onChange = { e => setName(e.target.value)}
                     required
                 />
-                <input
+                <StyledInput
                     placeholder = "E-mail"
                     type = 'email'
                     value = { email }
                     onChange = { e => setEmail(e.target.value)}
                     required
                 />
-                <input
+                <StyledInput
                     placeholder = "Senha"
                     type = 'password'
                     value = { password }
                     onChange = { e => setPassword(e.target.value)}
                     required
                 />
-                <input
+                <StyledInput
                     placeholder = "Confirme a senha"
                     type = 'password'
                     value = { passwordConfirmation }
                     onChange = { e => setPasswordConfirmation(e.target.value)}
                 />
-                <button type = "submit" disabled = {isClicked} >Cadastrar</button>
+                <StyledButton type = "submit" disabled = {isClicked} >Cadastrar</StyledButton>
                 <Link to ="/signIn" >Já tem uma conta? Entre agora!</Link>
             </form>
         </SignUpContainter>

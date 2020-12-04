@@ -1,10 +1,12 @@
 import Axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import styled from 'styled-components';
 import { RiArrowGoBackLine } from 'react-icons/ri';
 
 import UserContext from '../../contexts/UserContext';
+import StyledButton from '../../components/Buttons/StyledButton';
+import StyledInput from '../../components/Inputs/StyledInput';
+import TransactionsContainer from './TransactionContainer';
 
 export default function Transactions() {
     const [ transaction, setTransaction ] = useState('');
@@ -74,73 +76,23 @@ export default function Transactions() {
             </div>
             
             <form onSubmit = {recordTransaction}>
-                <input
+                <StyledInput
                     pattern = "^\d*(\.\d{0,2})?$"
                     value = { transaction }
                     onChange = { e => setTransaction(e.target.value)}
                     placeholder = "Valor"
                     required
                 />
-                <input
+                <StyledInput
                     value = { description }
                     onChange = { e => setDescription(e.target.value)}
                     placeholder = "Descrição"
                     maxLength = '18'
                     required
                 />
-                <button type = 'submit' disabled = {isClicked} >Salvar {recordType}</button>
+                <StyledButton type = 'submit' disabled = {isClicked} >Salvar {recordType}</StyledButton>
             </form>
         </TransactionsContainer>
     )
 }
 
-const TransactionsContainer = styled.main `
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    h1 {
-        font-size: 26px;
-        color: white;
-        padding: 25px;
-        margin-bottom: 15px;
-    }
-
-    svg {
-        position: fixed;
-        top: 22px;
-        font-size: 25px;
-        right: 15px;
-        color: white;
-    }
-
-    input {
-        display: block;
-        font-size: 20px;
-        font-family: inherit;
-        padding: 17px 5px 17px 10px;
-        outline: none;
-        border-radius: 5px;
-        border: none;
-        width: 86vw;
-        margin-bottom: 13px;
-    }
-
-    input::placeholder {
-        color: black;
-    }
-
-    button {
-        width: 86vw;
-        padding: 11px 0px;
-        font-size: 20px;
-        font-family: inherit;
-        background: #A328D6;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        margin-bottom: 32px;
-        outline: none;
-        font-weight: bold;
-    }
-`

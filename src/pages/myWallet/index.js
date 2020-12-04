@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import styled from 'styled-components';
+import Axios from 'axios';
 import dayjs from 'dayjs';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 
 import UserContext from '../../contexts/UserContext'
-import Axios from 'axios';
+import { MyWalletContainer, Li, Footer } from './myWalletStyles';
 
 export default function MyWallet() {
     const { user, setUser } = useContext(UserContext);
@@ -27,7 +27,6 @@ export default function MyWallet() {
                 let sum = 0;
                 res.data.forEach( ({transaction, type}) => {
                     let value = parseFloat(transaction.replace('R$ ','').replace('.','').replace(',','.'))
-                    
                     if(type === 'income') sum += value;
                     else if(type === 'expense') sum -= value;
                 });
@@ -94,89 +93,9 @@ export default function MyWallet() {
     )
 }
 
-const MyWalletContainer = styled.main `
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 
-    header {
-        display: flex;
-        font-size: 26px;
-        padding: 25px;
-        justify-content: space-between;
-        color: white;
-        width: 100%;
-    }
 
-    ul {
-        background: white;
-        width: 86vw;
-        height: 67vh;
-        border-radius: 5px;
-        padding: 23px 12px 27px;
-        overflow: scroll;
-    }
 
-    & > div {
-        display: flex;
-        justify-content: space-between;
-        width: 86%;
-        font-size: 17px;
-        color: white;
-        padding: 13px 0px;
-    }
 
-    a {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        background: #A328D6;
-        padding: 10px;
-        width: 45%;
-        height: 17vh;
-        border-radius: 5px;
 
-        svg {
-            font-size: 24px;
-        }
-    }
-`
-
-const Li = styled.li ` 
-        display:flex;
-        justify-content: space-between;
-        font-size: 16px;
-        margin-bottom: 15px;
-        
-
-        div {
-            display:flex
-        }
-
-        time {
-            color: #939393;
-            margin-right: 15px;
-
-        }
-
-        span {
-            color: ${ props => props.type === 'income' ? '#03AC00': '#C70000'};
-        }
-`
-
-const Footer = styled.footer ` 
-    display: flex;
-    justify-content: space-between;
-    position: fixed;
-    bottom: 21.60%;
-;
-    width: 81%;
-    background: white;
-    height: 40px;
-    align-items: center;
-    p {
-        color: ${ props => parseFloat(props.balance) > 0 ? '#03AC00' : '#C70000'}
-    }
-    
-`
 

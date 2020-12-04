@@ -1,7 +1,9 @@
 import Axios from 'axios';
 import React,{ useState, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import styled from 'styled-components';
+import StyledButton from '../../components/Buttons/StyledButton';
+import SignInContainer from './SignInContainer';
+import StyledInput from '../../components/Inputs/StyledInput';
 
 import UserContext from '../../contexts/UserContext';
 
@@ -50,7 +52,7 @@ export default function SignIn() {
         <SignInContainer>
             <h1>MyWallet</h1>
             <form onSubmit = { signIn }>
-                <input
+                <StyledInput
                     placeholder = 'E-mail'
                     type = 'email'
                     value = { email }
@@ -58,7 +60,7 @@ export default function SignIn() {
                     autoComplete = 'username'
                     required
                 />
-                <input
+                <StyledInput
                     placeholder = 'Senha'
                     type = 'password'
                     value = { password }
@@ -66,58 +68,10 @@ export default function SignIn() {
                     autoComplete = 'current-password'
                     required
                 />
-                <input type = 'submit' value = 'Entrar' disabled = { isClicked } />
+                <StyledButton type = "submit" disabled = {isClicked} >Entrar</StyledButton>
                 <Link to='/signUp' >Primeira Vez? Cadastre-se!</Link>
             </form>
         </SignInContainer>
     )
 }
 
-const SignInContainer = styled.div `
-    text-align: center;
-    padding-top: 159px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    h1 {
-        font-family: 'Saira Stencil One', cursive;
-        font-weight: 400;
-        font-size: 32px;
-        color: white;
-        margin-bottom: 24px;
-    }
-
-    input {
-        margin-bottom: 13px;
-        font-size: 20px;
-        display: block;
-        padding: 17px 5px 17px 10px;
-        outline: none;
-        border-radius: 5px;
-        border: none;
-        font-family: inherit;
-        width: 86vw;
-    }
-
-    input:nth-child(3) {
-        padding: 11px 0px;
-        font-family: inherit;
-        font-weight: bold;
-        background: #A328D6;
-        color: white;
-        border: none;
-        margin-bottom: 36px;
-        outline: none;
-    }
-
-    input::placeholder {
-        color: black;
-    }
-
-    a {
-        display: block;
-        color: white;
-        font-size: 15px;
-    }
-`
