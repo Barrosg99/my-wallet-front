@@ -27,13 +27,14 @@ export default function MyWallet() {
                 let sum = 0;
                 res.data.forEach( ({transaction, type}) => {
                     let value = parseFloat(transaction.replace('R$ ','').replace('.','').replace(',','.'))
+                    
                     if(type === 'income') sum += value;
                     else if(type === 'expense') sum -= value;
                 });
                 setBalance(sum.toFixed(2));
             })
             .catch( err => {
-                console.log(err);
+                alert(err);
             })
     },[]);
 
