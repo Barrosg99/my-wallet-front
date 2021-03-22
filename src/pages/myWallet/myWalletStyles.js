@@ -12,6 +12,10 @@ export const MyWalletContainer = styled(StyledMain)`
         justify-content: space-between;
         color: white;
         width: 100%;
+
+        svg {
+            cursor: pointer;
+        }
     }
 
     ul {
@@ -20,7 +24,6 @@ export const MyWalletContainer = styled(StyledMain)`
     height: 67vh;
     border-radius: 5px;
     padding: 23px 12px 27px;
-    overflow: scroll;
     position: absolute;
     top: 65px;
     }

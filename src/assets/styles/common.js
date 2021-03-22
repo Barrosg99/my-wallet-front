@@ -54,4 +54,8 @@ export default css`
   ul {
     list-style: none;
   }
+
+  button {
+    cursor: pointer;
+  }
 `;

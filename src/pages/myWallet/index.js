@@ -87,10 +87,12 @@ export default function MyWallet() {
                         <span> {transaction.transaction} </span>
                     </Li>   
                 )}
-                <Footer balance = {balance} width={componentWidth}>
-                    <h4>Saldo</h4>
-                    <p> {`R$ ${balance}`} </p>
-                </Footer>
+                { transactions.length !== 0 &&
+                    <Footer balance={balance} width={componentWidth}>
+                        <h4>Saldo</h4>
+                        <p> {`R$ ${balance}`} </p>
+                    </Footer>
+                }
             </ul>
             <div>
                 <Link to = '/register/income'>
