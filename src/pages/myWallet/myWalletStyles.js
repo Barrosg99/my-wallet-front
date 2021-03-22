@@ -2,6 +2,9 @@ const { default: styled } = require("styled-components");
 const { default: StyledMain } = require("../../components/Container/StyledMain");
 
 export const MyWalletContainer = styled(StyledMain)`
+    height: 100vh;
+    justify-content: space-between;
+
     header {
         display: flex;
         font-size: 26px;
@@ -13,11 +16,13 @@ export const MyWalletContainer = styled(StyledMain)`
 
     ul {
         background: white;
-        width: 86vw;
-        height: 67vh;
-        border-radius: 5px;
-        padding: 23px 12px 27px;
-        overflow: scroll;
+    width: 86vw;
+    height: 67vh;
+    border-radius: 5px;
+    padding: 23px 12px 27px;
+    overflow: scroll;
+    position: absolute;
+    top: 65px;
     }
 
     & > div {
@@ -66,14 +71,16 @@ export const Li = styled.li `
     }
 `
 
-export const Footer = styled.footer ` 
+export const Footer = styled.footer.attrs(props => ({
+    style: {
+        width: props.width
+    }
+})) ` 
     display: flex;
     justify-content: space-between;
-    position: fixed;
-    bottom: 21.60%;
+    position: absolute;
+    bottom:0;
 
-    width: 81%;
-    background: white;
     height: 40px;
     align-items: center;
     p {

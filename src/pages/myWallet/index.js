@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import Axios from 'axios';
 import dayjs from 'dayjs';
@@ -10,6 +10,8 @@ import { MyWalletContainer, Li, Footer } from './myWalletStyles';
 
 export default function MyWallet() {
     const { user, setUser } = useContext(UserContext);
+    const ref = useRef();
+    const [componentWidth, setComponentWidth] = useState('81%');
     const [ transactions, setTransactions ] = useState([]);
     let [ balance, setBalance ] = useState(); 
     const history = useHistory();
@@ -30,12 +32,29 @@ export default function MyWallet() {
                     if(type === 'income') sum += value;
                     else if(type === 'expense') sum -= value;
                 });
-                setBalance(sum.toFixed(2));
+                setBalance(sum.toFixed(2).replace('.',','));
             })
             .catch( err => {
                 alert(err);
             })
-    },[]);
+    }, []);
+
+    function handleResize() {
+        if (ref.current) {
+            setComponentWidth(`${ref.current.offsetWidth}px`)
+        }
+    }
+
+    useLayoutEffect(() => {
+        handleResize();
+
+        window.addEventListener('resize', handleResize)
+
+        return _ => {
+            window.removeEventListener('resize', handleResize)
+
+        }
+    });
 
     function logOut() {
         const signOut = confirm('Você deseja deslogar?');
@@ -60,7 +79,7 @@ export default function MyWallet() {
             </header>
             <ul>
                 { transactions.map( transaction => 
-                    <Li key = {transaction.id} type = {transaction.type} >
+                    <Li key={transaction.id} type={transaction.type} ref={ref} >
                         <div>
                             <time>{dayjs(transaction.date).format('DD/MM')}</time>
                             <p> {transaction.description} </p>
@@ -68,9 +87,9 @@ export default function MyWallet() {
                         <span> {transaction.transaction} </span>
                     </Li>   
                 )}
-                <Footer balance = {balance}>
+                <Footer balance = {balance} width={componentWidth}>
                     <h4>Saldo</h4>
-                    <p> {balance} </p>
+                    <p> {`R$ ${balance}`} </p>
                 </Footer>
             </ul>
             <div>
